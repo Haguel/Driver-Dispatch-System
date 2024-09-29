@@ -11,3 +11,7 @@ spring:
     password: password
     schemas: public
     url: jdbc:postgresql://localhost:5432/dds
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
