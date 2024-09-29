@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dds
+    username: Test
+    password: password
+    driverClassName: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    user: Test
+    password: password
+    schemas: public
+    url: jdbc:postgresql://localhost:5432/dds
