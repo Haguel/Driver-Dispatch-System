@@ -2,12 +2,19 @@ package dev.haguel.dds.dao;
 
 import dev.haguel.dds.model.CargoStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CargoStatusRepository extends JpaRepository<CargoStatus, Long> {
-    Optional<CargoStatus> findByStatus(String status);
+    @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'not started'")
+    CargoStatus findNotStartedStatus();
+
+    @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'in progress'")
+    CargoStatus findInProgressStatus();
+
+    @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'completed'")
+    CargoStatus findCompleted();
 
     @Override
     default <S extends CargoStatus> S save(S entity) {

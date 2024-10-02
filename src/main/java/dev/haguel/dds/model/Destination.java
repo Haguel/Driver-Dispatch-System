@@ -1,14 +1,14 @@
 package dev.haguel.dds.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"cargoOrders"})
+@ToString(exclude = {"cargoOrders"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "destination")
@@ -23,6 +23,15 @@ public class Destination {
     @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
+    private String address;
+
     @OneToMany(mappedBy = "destination")
     private List<CargoOrder> cargoOrders;
+
+    public Destination(String country, String city, String address) {
+        this.country = country;
+        this.city = city;
+        this.address = address;
+    }
 }

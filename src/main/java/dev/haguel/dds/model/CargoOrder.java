@@ -1,8 +1,6 @@
 package dev.haguel.dds.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -20,13 +18,16 @@ public class CargoOrder {
     private String cargoType;
 
     @Column(nullable = false)
-    private double cargoAmount;
+    private int cargoAmount;
 
     @Column(nullable = false)
-    private double payout;
+    private int payout;
 
     @Column(nullable = false)
     private short daysTillComplete;
+
+    @Column
+    private short minExperienceRequired;
 
     @OneToOne
     @JoinColumn(name = "driver_id")
@@ -37,10 +38,21 @@ public class CargoOrder {
     private Vehicle vehicle;
 
     @ManyToOne
-    @JoinColumn(name = "cargo_status_id")
+    @JoinColumn(name = "cargo_status_id", nullable = false)
     private CargoStatus cargoStatus;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id")
+    @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;
+
+    public CargoOrder(String cargoType, int cargoAmount, int payout, short daysTillComplete, short minExperienceRequired,
+                      CargoStatus cargoStatus, Destination destination) {
+        this.cargoType = cargoType;
+        this.cargoAmount = cargoAmount;
+        this.payout = payout;
+        this.daysTillComplete = daysTillComplete;
+        this.minExperienceRequired = minExperienceRequired;
+        this.cargoStatus = cargoStatus;
+        this.destination = destination;
+    }
 }

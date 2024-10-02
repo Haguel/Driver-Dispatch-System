@@ -19,7 +19,4 @@ public class CargoStatus {
 
     @Column(nullable = false)
     private String status;
-
-    @OneToMany(mappedBy = "cargoStatus")
-    private List<CargoOrder> cargoOrders;
 }

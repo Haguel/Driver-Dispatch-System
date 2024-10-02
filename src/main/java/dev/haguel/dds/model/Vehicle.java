@@ -1,13 +1,13 @@
 package dev.haguel.dds.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"cargoOrder"})
+@ToString(exclude = {"cargoOrder"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "vehicle")
@@ -23,7 +23,7 @@ public class Vehicle {
     private String model;
 
     @Column(nullable = false)
-    private double payload;
+    private int payload;
 
     @Column(nullable = false)
     private boolean isBroken;
@@ -31,7 +31,7 @@ public class Vehicle {
     @OneToOne(mappedBy = "vehicle")
     private CargoOrder cargoOrder;
 
-    public Vehicle(String manufacturer, String model, double payload) {
+    public Vehicle(String manufacturer, String model, int payload) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.payload = payload;

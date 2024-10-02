@@ -1,14 +1,14 @@
 package dev.haguel.dds.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"cargoOrder"})
+@ToString(exclude = {"cargoOrder"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "driver")
@@ -24,7 +24,7 @@ public class Driver {
     private String surname;
 
     @Column(nullable = false)
-    private double totalPayouts;
+    private int totalPayouts;
 
     @Column(nullable = false)
     private Date dateOfBirth;
