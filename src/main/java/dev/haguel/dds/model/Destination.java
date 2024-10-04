@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,7 +28,7 @@ public class Destination {
     private String address;
 
     @OneToMany(mappedBy = "destination")
-    private List<CargoOrder> cargoOrders;
+    private Set<CargoOrder> cargoOrders;
 
     public Destination(String country, String city, String address) {
         this.country = country;

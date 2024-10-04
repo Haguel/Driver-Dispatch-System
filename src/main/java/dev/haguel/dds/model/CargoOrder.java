@@ -1,5 +1,7 @@
 package dev.haguel.dds.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.haguel.dds.serializer.DestinationSerializer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,6 +43,7 @@ public class CargoOrder {
     @JoinColumn(name = "cargo_status_id", nullable = false)
     private CargoStatus cargoStatus;
 
+    @JsonSerialize(using = DestinationSerializer.class)
     @ManyToOne
     @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;

@@ -3,6 +3,7 @@ package dev.haguel.dds.service;
 import dev.haguel.dds.DTO.CargoOrderDTO;
 import dev.haguel.dds.dao.CargoOrderRepository;
 import dev.haguel.dds.dao.CargoStatusRepository;
+import dev.haguel.dds.exception.CargoOrderNotFoundException;
 import dev.haguel.dds.exception.DriverNotFoundException;
 import dev.haguel.dds.exception.VehicleNotFoundException;
 import dev.haguel.dds.model.*;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional
@@ -48,5 +50,28 @@ public class CargoService {
         cargoOrder.setVehicle(vehicle);
 
         return cargoOrderRepository.save(cargoOrder);
+    }
+
+    public List<CargoOrder> getOrders() {
+        return cargoOrderRepository.findAll();
+    }
+
+    public CargoOrder getOrderById(Long id) throws CargoOrderNotFoundException {
+        return cargoOrderRepository.findById(id)
+                .orElseThrow(() -> new CargoOrderNotFoundException("Cargo order with id " + id + " not found"));
+    }
+
+    public void pauseOrder(CargoOrder cargoOrder) {
+        CargoStatus pausedStatus = cargoStatusRepository.findPausedStatus();
+        cargoOrder.setCargoStatus(pausedStatus);
+
+        cargoOrderRepository.save(cargoOrder);
+    }
+
+    public void resumeOrder(CargoOrder cargoOrder) {
+        CargoStatus inProgressStatus = cargoStatusRepository.findInProgressStatus();
+        cargoOrder.setCargoStatus(inProgressStatus);
+
+        cargoOrderRepository.save(cargoOrder);
     }
 }

@@ -1,5 +1,8 @@
 package dev.haguel.dds.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.haguel.dds.serializer.CargoOrderSerializer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +36,7 @@ public class Driver {
     @Column(nullable = false)
     private short experience;
 
+    @JsonSerialize(using = CargoOrderSerializer.class)
     @OneToOne(mappedBy = "driver")
     private CargoOrder cargoOrder;
 

@@ -1,5 +1,7 @@
 package dev.haguel.dds.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.haguel.dds.serializer.CargoOrderSerializer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +30,7 @@ public class Vehicle {
     @Column(nullable = false)
     private boolean isBroken;
 
+    @JsonSerialize(using = CargoOrderSerializer.class)
     @OneToOne(mappedBy = "vehicle")
     private CargoOrder cargoOrder;
 

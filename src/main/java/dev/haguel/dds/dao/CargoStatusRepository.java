@@ -13,6 +13,9 @@ public interface CargoStatusRepository extends JpaRepository<CargoStatus, Long> 
     @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'in progress'")
     CargoStatus findInProgressStatus();
 
+    @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'paused'")
+    CargoStatus findPausedStatus();
+
     @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'completed'")
     CargoStatus findCompleted();
 
