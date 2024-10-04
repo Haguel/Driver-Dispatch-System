@@ -23,8 +23,6 @@ public class VehicleService {
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicle = new Vehicle(vehicleDTO.getManufacturer(), vehicleDTO.getModel(), vehicleDTO.getPayload());
 
-        vehicleRepository.save(vehicle);
-
-        return vehicle;
+        return vehicleRepository.save(vehicle);
     }
 }

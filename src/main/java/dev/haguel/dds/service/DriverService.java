@@ -23,8 +23,6 @@ public class DriverService {
         Driver driver = new Driver(driverDTO.getName(), driverDTO.getSurname(),
                 driverDTO.getDateOfBirth(), driverDTO.getExperience());
 
-        driverRepository.save(driver);
-
-        return driver;
+        return driverRepository.save(driver);
     }
 }

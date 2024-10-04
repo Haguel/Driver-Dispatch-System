@@ -10,7 +10,7 @@ import java.util.List;
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query(value = "SELECT * FROM driver d " +
             "WHERE d.id NOT IN (SELECT co.driver_id FROM cargo_order co WHERE co.driver_id IS NOT NULL) " +
-            "AND d.experience > :experience " +
+            "AND d.experience >= :experience " +
             "ORDER BY d.experience " +
             "LIMIT 1",
             nativeQuery = true)
