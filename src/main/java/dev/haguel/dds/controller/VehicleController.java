@@ -29,9 +29,11 @@ public class VehicleController {
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
             model.addAttribute("vehicle", vehicle);
+
             return "vehicle";
         } catch (VehicleNotFoundException exception) {
             model.addAttribute("error", exception.getMessage());
+
             return "error";
         }
     }
@@ -39,12 +41,14 @@ public class VehicleController {
     @GetMapping("/create")
     public String showCreateVehicleForm(Model model) {
         model.addAttribute("vehicleDTO", new VehicleDTO());
+
         return "createVehicle";
     }
 
     @PostMapping()
     public String createVehicle(@ModelAttribute @Valid VehicleDTO vehicleDTO) {
         Vehicle vehicle = vehicleService.createVehicle(vehicleDTO);
+
         return "redirect:/vehicles/" + vehicle.getId();
     }
 
@@ -57,9 +61,11 @@ public class VehicleController {
             } else {
                 vehicleService.setBrokenStatus(vehicle);
             }
+
             return "redirect:/vehicles/" + id;
         } catch (VehicleNotFoundException exception) {
             model.addAttribute("error", exception.getMessage());
+
             return "error";
         }
     }

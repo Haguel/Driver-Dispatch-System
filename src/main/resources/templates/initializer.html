@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DDS Initializer</title>
+</head>
+<body>
+<div th:insert="fragments/menu :: menu"></div>
+<h1>DDS Initializer</h1>
+<div th:if="${message}" style="color: green;">
+    <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/initializer/clearDb}" method="post">
+    <button type="submit">Clear Database</button>
+</form>
+<form th:action="@{/initializer/initDrivers}" method="post">
+    <button type="submit">Initialize Drivers</button>
+</form>
+<form th:action="@{/initializer/initVehicles}" method="post">
+    <button type="submit">Initialize Vehicles</button>
+</form>
+</body>
+</html>

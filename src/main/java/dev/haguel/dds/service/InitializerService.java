@@ -1,11 +1,9 @@
-package dev.haguel.dds;
+package dev.haguel.dds.service;
 
 import dev.haguel.dds.DTO.DriverDTO;
 import dev.haguel.dds.DTO.VehicleDTO;
 import dev.haguel.dds.factory.DriverFactory;
 import dev.haguel.dds.factory.VehicleFactory;
-import dev.haguel.dds.service.DriverService;
-import dev.haguel.dds.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class DDSInitializer {
+public class InitializerService {
     @PersistenceContext
     private final EntityManager entityManager;
     private final DriverService driverService;

@@ -6,10 +6,12 @@ import java.util.Random;
 
 public class VehicleFactory {
     private static final String[][] VEHICLES = {
-            {"Toyota", "Corolla", "Camry", "Highlander"},
-            {"Ford", "F-150", "Mustang", "Explorer"},
-            {"Tesla", "Model S", "Model X", "Model 3"},
-            {"BMW", "X5", "M3", "i8"}
+            {"Volvo", "FH16", "FMX"},
+            {"Scania", "R-Series", "S-Series"},
+            {"Mercedes-Benz", "Actros", "Arocs"},
+            {"MAN", "TGX", "TGS"},
+            {"DAF", "XF", "CF"},
+            {"Iveco", "Stralis", "Trakker"}
     };
 
     private static final Random random = new Random();
@@ -19,7 +21,7 @@ public class VehicleFactory {
         String manufacturer = VEHICLES[randomManufacturerIndex][0];
         String model = VEHICLES[randomManufacturerIndex][random.nextInt(1, VEHICLES[randomManufacturerIndex].length)];
 
-        int payload = 500 + random.nextInt(9500);
+        int payload = 10000 + random.nextInt(30000);
 
         return new VehicleDTO(manufacturer, model, payload);
     }

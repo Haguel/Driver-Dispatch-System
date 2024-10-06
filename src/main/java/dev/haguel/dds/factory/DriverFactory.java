@@ -19,7 +19,7 @@ public class DriverFactory {
         long randomDateMillis = random.nextLong(startMillis, endMillis);
         Date randomDateOfBirth = new Date(randomDateMillis);
 
-        short randomExperience = (short) random.nextInt(0, 21);
+        short randomExperience = (short) random.nextInt(0, 200);
 
         return new DriverDTO(randomName, randomSurname, randomDateOfBirth, randomExperience);
     }

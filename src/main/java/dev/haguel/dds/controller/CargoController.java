@@ -49,11 +49,11 @@ public class CargoController {
     @PostMapping
     public String createCargoOrder(@ModelAttribute CargoOrderDTO cargoOrderDTO) {
         try {
-            cargoService.createOrder(cargoOrderDTO);
-        } catch (Exception e) {
-            return "redirect:/cargo/create?error=" + e.getMessage();
-        }
+            CargoOrder cargoOrder = cargoService.createOrder(cargoOrderDTO);
 
-        return "redirect:/cargo/orders";
+            return "redirect:/cargo/" + cargoOrder.getId();
+        } catch (Exception e) {
+            return "error";
+        }
     }
 }
