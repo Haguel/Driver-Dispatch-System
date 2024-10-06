@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Driver Details</title>
+</head>
+<body>
+<div th:insert="fragments/menu :: menu"></div>
+<h1>Driver Details</h1>
+<p><strong>ID:</strong> <span th:text="${driver.id}"></span></p>
+<p><strong>Name:</strong> <span th:text="${driver.name}"></span></p>
+<p><strong>Experience:</strong> <span th:text="${driver.experience}"></span></p>
+<a th:href="@{/drivers}">Back to list</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cargo Order</title>
+</head>
+<body>
+<div th:insert="fragments/menu :: menu"></div>
+<h1>Cargo Order Details</h1>
+<p><strong>ID:</strong> <span th:text="${order.id}"></span></p>
+<p><strong>Cargo Type:</strong> <span th:text="${order.cargoType}"></span></p>
+<p><strong>Cargo Amount:</strong> <span th:text="${order.cargoAmount}"></span></p>
+<p><strong>Payout:</strong> <span th:text="${order.payout}"></span></p>
+<p><strong>Days Till Complete:</strong> <span th:text="${order.daysTillComplete}"></span></p>
+<p><strong>Min Experience Required (months):</strong> <span th:text="${order.minExperienceRequired}"></span></p>
+<a th:href="@{/cargo}">Back to list</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu</title>
+</head>
+<body>
+<div th:fragment="menu">
+    <nav>
+        <ul>
+            <li><a th:href="@{/cargo}">Cargo Orders</a></li>
+            <li><a th:href="@{/vehicles}">Vehicles</a></li>
+            <li><a th:href="@{/drivers}">Drivers</a></li>
+            <li><a th:href="@{/cargo/create}">Create Cargo Order</a></li>
+            <li><a th:href="@{/vehicles/create}">Create Vehicle</a></li>
+            <li><a th:href="@{/drivers/create}">Create Driver</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
