@@ -6,7 +6,7 @@
 <body>
 <div th:insert="fragments/menu :: menu"></div>
 <h1>Create New Vehicle</h1>
-<form th:action="@{/vehicles}" th:object="${vehicleDTO}" method="post">
+<form th:action="@{${createVehicleEndpoint}}" th:object="${vehicleDTO}" method="post">
     <label for="manufacturer">Manufacturer:</label>
     <input type="text" id="manufacturer" th:field="*{manufacturer}" required/>
     <br/>

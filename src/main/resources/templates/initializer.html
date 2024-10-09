@@ -10,13 +10,13 @@
     <p th:text="${message}"></p>
 </div>
 
-<form th:action="@{/initializer/clearDb}" method="post">
+<form th:action="@{${clearDbEndpoint}}" method="post">
     <button type="submit">Clear Database</button>
 </form>
-<form th:action="@{/initializer/initDrivers}" method="post">
+<form th:action="@{${initDriversEndpoint}}" method="post">
     <button type="submit">Initialize Drivers</button>
 </form>
-<form th:action="@{/initializer/initVehicles}" method="post">
+<form th:action="@{${initVehiclesEndpoint}}" method="post">
     <button type="submit">Initialize Vehicles</button>
 </form>
 </body>

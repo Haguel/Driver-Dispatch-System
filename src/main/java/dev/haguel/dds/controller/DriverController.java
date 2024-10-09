@@ -4,9 +4,8 @@ import dev.haguel.dds.DTO.DriverDTO;
 import dev.haguel.dds.exception.DriverNotFoundException;
 import dev.haguel.dds.model.Driver;
 import dev.haguel.dds.service.DriverService;
+import dev.haguel.dds.util.EndPoints;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,30 +13,34 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/drivers")
 @RequiredArgsConstructor
 public class DriverController {
     private final DriverService driverService;
 
-    @PostMapping()
-    public String createDriver(@ModelAttribute DriverDTO driverDTO) {
+    @PostMapping(EndPoints.CREATE_DRIVER)
+    public String createDriver(@ModelAttribute @Valid DriverDTO driverDTO) {
         Driver driver = driverService.createDriver(driverDTO);
 
-        return "redirect:/drivers/" + driver.getId();
+        return "redirect:" + EndPoints.GET_DRIVER.replace("{id}", String.valueOf(driver.getId()));
     }
 
-    @GetMapping()
+    @GetMapping(EndPoints.GET_DRIVERS)
     public String getAllDrivers(Model model) {
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("drivers", driverService.getDrivers());
+        model.addAttribute("getDriverEndpoint", EndPoints.GET_DRIVER);
 
         return "drivers";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(EndPoints.GET_DRIVER)
     public String getDriverById(@PathVariable("id") Long id, Model model) {
+        EndPoints.setMenuEndpoints(model);
         try {
             Driver driver = driverService.getDriversById(id);
+
             model.addAttribute("driver", driver);
+            model.addAttribute("getDriversEndpoint", EndPoints.GET_DRIVERS);
 
             return "driver";
         } catch (DriverNotFoundException exception) {
@@ -47,9 +50,12 @@ public class DriverController {
         }
     }
 
-    @GetMapping("/create")
-    public String showCreateDriverForm(Model model) {
+    @GetMapping(EndPoints.CREATE_DRIVER_FORM)
+    public String createDriverForm(Model model) {
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("driverDTO", new DriverDTO());
+        model.addAttribute("createDriverEndpoint", EndPoints.CREATE_DRIVER);
+
         return "createDriver";
     }
 }

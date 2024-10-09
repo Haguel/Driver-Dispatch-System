@@ -2,6 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Drivers</title>
+    <style>
+        th {
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="fragments/menu :: menu"></div>
@@ -21,7 +29,7 @@
         <td th:text="${driver.name}"></td>
         <td th:text="${driver.experience}"></td>
         <td>
-            <a th:href="@{/drivers/{id}(id=${driver.id})}">View</a>
+            <a th:href="@{${getDriverEndpoint}(id=${driver.id})}">View</a>
         </td>
     </tr>
     </tbody>

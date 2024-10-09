@@ -2,6 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Vehicles</title>
+    <style>
+        th {
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="fragments/menu :: menu"></div>
@@ -25,10 +33,10 @@
         <td th:text="${vehicle.payload}"></td>
         <td th:text="${vehicle.broken ? 'Broken' : 'Operational'}"></td>
         <td>
-            <form th:action="@{/vehicles/{id}/broken-status(id=${vehicle.id})}" method="post" style="display:inline;">
+            <form th:action="@{${getBrokenStatusHandlerEndpoint}(id=${vehicle.id})}" method="post" style="display:inline;">
                 <button type="submit" th:text="${vehicle.broken ? 'Mark as Operational' : 'Mark as Broken'}"></button>
             </form>
-            <a th:href="@{/vehicles/{id}(id=${vehicle.id})}">View</a>
+            <a th:href="@{${getVehicleEndpoint}(id=${vehicle.id})}">View</a>
         </td>
     </tr>
     </tbody>

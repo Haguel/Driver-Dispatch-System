@@ -17,7 +17,7 @@ public interface CargoStatusRepository extends JpaRepository<CargoStatus, Long> 
     CargoStatus findPausedStatus();
 
     @Query("SELECT cs FROM CargoStatus cs WHERE cs.status = 'completed'")
-    CargoStatus findCompleted();
+    CargoStatus findCompletedStatus();
 
     @Override
     default <S extends CargoStatus> S save(S entity) {

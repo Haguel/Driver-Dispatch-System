@@ -13,19 +13,29 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 @Service
-public class CargoService {
+public class CargoOrderService {
     private final CargoOrderRepository cargoOrderRepository;
-    private final CargoStatusRepository cargoStatusRepository;
+    private final CargoStatusService cargoStatusService;
     private final DestinationService destinationService;
     private final DriverService driverService;
     private final VehicleService vehicleService;
 
+    private void completeOrder(CargoOrder cargoOrder) {
+        CargoStatus completedStatus = cargoStatusService.getCompletedStatus();
+
+        cargoOrder.setCargoStatus(completedStatus);
+        cargoOrder.setDriver(null);
+        cargoOrder.setVehicle(null);
+
+        cargoOrderRepository.delete(cargoOrderRepository.save(cargoOrder));
+    }
+
     public CargoOrder createOrder(CargoOrderDTO cargoOrderDTO)
             throws DriverNotFoundException, VehicleNotFoundException {
-        CargoStatus notStartedStatus = cargoStatusRepository.findNotStartedStatus();
+        CargoStatus notStartedStatus = cargoStatusService.getNotStartedStatus();
         Destination destination = destinationService.createDestination(cargoOrderDTO.getDestinationDTO());
         CargoOrder cargoOrder = new CargoOrder(
                 cargoOrderDTO.getCargoType(),
@@ -43,7 +53,7 @@ public class CargoService {
         if(driver == null) throw new DriverNotFoundException("No driver with required experience found");
         Vehicle vehicle = vehicleService.getFreeVehicleByPayload(cargoOrderDTO.getCargoAmount());
         if(vehicle == null) throw new VehicleNotFoundException("No vehicle with required payload found");
-        CargoStatus inProgressStatus = cargoStatusRepository.findInProgressStatus();
+        CargoStatus inProgressStatus = cargoStatusService.getInProgressStatus();
 
         cargoOrder.setCargoStatus(inProgressStatus);
         cargoOrder.setDriver(driver);
@@ -56,22 +66,40 @@ public class CargoService {
         return cargoOrderRepository.findAll();
     }
 
+    public List<CargoOrder> getOrdersByStatus(CargoStatus status) {
+        return cargoOrderRepository.findByCargoStatus(status.getStatus());
+    }
+
     public CargoOrder getOrderById(Long id) throws CargoOrderNotFoundException {
         return cargoOrderRepository.findById(id)
                 .orElseThrow(() -> new CargoOrderNotFoundException("Cargo order with id " + id + " not found"));
     }
 
+
     public void pauseOrder(CargoOrder cargoOrder) {
-        CargoStatus pausedStatus = cargoStatusRepository.findPausedStatus();
+        CargoStatus pausedStatus = cargoStatusService.getPausedStatus();
         cargoOrder.setCargoStatus(pausedStatus);
 
         cargoOrderRepository.save(cargoOrder);
     }
 
     public void resumeOrder(CargoOrder cargoOrder) {
-        CargoStatus inProgressStatus = cargoStatusRepository.findInProgressStatus();
+        CargoStatus inProgressStatus = cargoStatusService.getInProgressStatus();
         cargoOrder.setCargoStatus(inProgressStatus);
 
         cargoOrderRepository.save(cargoOrder);
+    }
+
+    public void passDay(CargoOrder cargoOrder) {
+        System.out.println(cargoOrder);
+        short daysToComplete = cargoOrder.getDaysTillComplete();
+        daysToComplete--;
+        cargoOrder.setDaysTillComplete(daysToComplete);
+
+        if(daysToComplete == 0) {
+            completeOrder(cargoOrder);
+        } else {
+            cargoOrderRepository.save(cargoOrder);
+        }
     }
 }

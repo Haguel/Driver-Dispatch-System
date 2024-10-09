@@ -6,7 +6,7 @@
 <body>
 <div th:insert="fragments/menu :: menu"></div>
 <h1>Create New Cargo Order</h1>
-<form th:action="@{/cargo}" th:object="${cargoOrderDTO}" method="post">
+<form th:action="@{${createOrderEndpoint}}" th:object="${cargoOrderDTO}" method="post">
     <label for="cargoType">Cargo Type:</label>
     <input type="text" id="cargoType" th:field="*{cargoType}" required/>
     <br/>

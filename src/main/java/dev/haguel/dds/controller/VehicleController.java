@@ -4,8 +4,8 @@ import dev.haguel.dds.DTO.VehicleDTO;
 import dev.haguel.dds.exception.VehicleNotFoundException;
 import dev.haguel.dds.model.Vehicle;
 import dev.haguel.dds.service.VehicleService;
+import dev.haguel.dds.util.EndPoints;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,22 +13,29 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/vehicles")
 @RequiredArgsConstructor
 public class VehicleController {
     private final VehicleService vehicleService;
 
-    @GetMapping()
+    @GetMapping(EndPoints.GET_VEHICLES)
     public String getAllVehicles(Model model) {
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("vehicles", vehicleService.getVehicles());
+        model.addAttribute("getVehicleEndpoint", EndPoints.GET_VEHICLE);
+        model.addAttribute("getBrokenStatusHandlerEndpoint", EndPoints.HANDLE_BROKEN_STATUS);
+
         return "vehicles";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(EndPoints.GET_VEHICLE)
     public String getVehicleById(@PathVariable("id") Long id, Model model) {
+        EndPoints.setMenuEndpoints(model);
+
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
+
             model.addAttribute("vehicle", vehicle);
+            model.addAttribute("getVehiclesEndpoint", EndPoints.GET_VEHICLES);
 
             return "vehicle";
         } catch (VehicleNotFoundException exception) {
@@ -38,22 +45,25 @@ public class VehicleController {
         }
     }
 
-    @GetMapping("/create")
-    public String showCreateVehicleForm(Model model) {
+    @GetMapping(EndPoints.CREATE_VEHICLE_FORM)
+    public String createVehicleForm(Model model) {
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("vehicleDTO", new VehicleDTO());
+        model.addAttribute("createVehicleEndpoint", EndPoints.CREATE_VEHICLE);
 
         return "createVehicle";
     }
 
-    @PostMapping()
+    @PostMapping(EndPoints.CREATE_VEHICLE)
     public String createVehicle(@ModelAttribute @Valid VehicleDTO vehicleDTO) {
         Vehicle vehicle = vehicleService.createVehicle(vehicleDTO);
 
-        return "redirect:/vehicles/" + vehicle.getId();
+        return "redirect:" + EndPoints.GET_VEHICLE.replace("{id}", String.valueOf(vehicle.getId()));
     }
 
-    @PostMapping("/{id}/broken-status")
+    @PostMapping(EndPoints.HANDLE_BROKEN_STATUS)
     public String handleBrokenStatus(@PathVariable("id") Long id, Model model) {
+        EndPoints.setMenuEndpoints(model);
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
             if (vehicle.isBroken()) {
@@ -62,7 +72,7 @@ public class VehicleController {
                 vehicleService.setBrokenStatus(vehicle);
             }
 
-            return "redirect:/vehicles/" + id;
+            return "redirect:" + EndPoints.GET_VEHICLES;
         } catch (VehicleNotFoundException exception) {
             model.addAttribute("error", exception.getMessage());
 

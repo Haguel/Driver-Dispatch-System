@@ -7,13 +7,13 @@
 <div th:fragment="menu">
     <nav>
         <ul>
-            <li><a th:href="@{/initializer}">Initializer</a></li>
-            <li><a th:href="@{/cargo}">Cargo Orders</a></li>
-            <li><a th:href="@{/vehicles}">Vehicles</a></li>
-            <li><a th:href="@{/drivers}">Drivers</a></li>
-            <li><a th:href="@{/cargo/create}">Create Cargo Order</a></li>
-            <li><a th:href="@{/vehicles/create}">Create Vehicle</a></li>
-            <li><a th:href="@{/drivers/create}">Create Driver</a></li>
+            <li><a th:href="@{${initializerMenu}}">Initializer</a></li>
+            <li><a th:href="@{${getCargoOrders}}">Cargo Orders</a></li>
+            <li><a th:href="@{${getVehicles}}">Vehicles</a></li>
+            <li><a th:href="@{${getDrivers}}">Drivers</a></li>
+            <li><a th:href="@{${createCargoOrderForm}}">Create Cargo Order</a></li>
+            <li><a th:href="@{${createVehicleForm}}">Create Vehicle</a></li>
+            <li><a th:href="@{${createDriverForm}}">Create Driver</a></li>
         </ul>
     </nav>
 </div>

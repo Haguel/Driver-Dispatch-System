@@ -2,6 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cargo Orders</title>
+    <style>
+        th {
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="fragments/menu :: menu"></div>
@@ -12,9 +20,7 @@
         <th>ID</th>
         <th>Cargo Type</th>
         <th>Cargo Amount</th>
-        <th>Payout</th>
         <th>Days Till Complete</th>
-        <th>Min Experience Required</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -23,11 +29,9 @@
         <td th:text="${order.id}"></td>
         <td th:text="${order.cargoType}"></td>
         <td th:text="${order.cargoAmount}"></td>
-        <td th:text="${order.payout}"></td>
         <td th:text="${order.daysTillComplete}"></td>
-        <td th:text="${order.minExperienceRequired}"></td>
         <td>
-            <a th:href="@{/cargo/{id}(id=${order.id})}">View</a>
+            <a th:href="@{${getCargoOrderEndpoint}(id = ${order.id})}">View</a>
         </td>
     </tr>
     </tbody>

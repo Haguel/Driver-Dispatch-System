@@ -1,6 +1,7 @@
 package dev.haguel.dds.controller;
 
 import dev.haguel.dds.service.InitializerService;
+import dev.haguel.dds.util.EndPoints;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,35 +10,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/initializer")
 @RequiredArgsConstructor
 public class InitializerController {
     private final InitializerService initializerService;
 
-    @GetMapping
+    @GetMapping(EndPoints.GET_INITIALIZER_MENU)
     public String showInitializerPage(Model model) {
+        EndPoints.setMenuEndpoints(model);
+        model.addAttribute("clearDbEndpoint", EndPoints.CLEAR_DB);
+        model.addAttribute("initDriversEndpoint", EndPoints.INIT_DRIVERS);
+        model.addAttribute("initVehiclesEndpoint", EndPoints.INIT_VEHICLES);
+
         return "initializer";
     }
 
-    @PostMapping("/clearDb")
+    @PostMapping(EndPoints.CLEAR_DB)
     public String clearDatabase(Model model) {
         initializerService.clearDb();
+
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("message", "Databased cleared successfully.");
 
         return "initializer";
     }
 
-    @PostMapping("/initDrivers")
+    @PostMapping(EndPoints.INIT_DRIVERS)
     public String initializeDrivers(Model model) {
         initializerService.initDrivers();
+
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("message", "Drivers initialized successfully.");
 
         return "initializer";
     }
 
-    @PostMapping("/initVehicles")
+    @PostMapping(EndPoints.INIT_VEHICLES)
     public String initializeVehicles(Model model) {
         initializerService.initVehicles();
+
+        EndPoints.setMenuEndpoints(model);
         model.addAttribute("message", "Vehicles initialized successfully.");
 
         return "initializer";

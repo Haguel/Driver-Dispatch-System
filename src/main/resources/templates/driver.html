@@ -9,6 +9,6 @@
 <p><strong>ID:</strong> <span th:text="${driver.id}"></span></p>
 <p><strong>Name:</strong> <span th:text="${driver.name}"></span></p>
 <p><strong>Experience:</strong> <span th:text="${driver.experience}"></span></p>
-<a th:href="@{/drivers}">Back to list</a>
+<a th:href="@{${getDriversEndpoint}}">Back to list</a>
 </body>
 </html>
