@@ -1,6 +1,5 @@
 package dev.haguel.dds.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import dev.haguel.dds.serializer.CargoOrderSerializer;
 import lombok.*;

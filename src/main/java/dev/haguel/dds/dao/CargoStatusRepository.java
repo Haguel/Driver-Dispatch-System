@@ -21,21 +21,21 @@ public interface CargoStatusRepository extends JpaRepository<CargoStatus, Long> 
 
     @Override
     default <S extends CargoStatus> S save(S entity) {
-        throw new UnsupportedOperationException("Save operation is not supported for CargoStatus");
+        throw new UnsupportedOperationException("Save operation is not supported for unwritable entities");
     }
 
     @Override
     default <S extends CargoStatus> List<S> saveAll(Iterable<S> entities) {
-        throw new UnsupportedOperationException("Save operation is not supported for CargoStatus");
+        throw new UnsupportedOperationException("Save operation is not supported for unwritable entities");
     }
 
     @Override
     default void deleteById(Long id) {
-        throw new UnsupportedOperationException("Delete operation is not supported for CargoStatus");
+        throw new UnsupportedOperationException("Delete operation is not supported for unwritable entities");
     }
 
     @Override
     default void delete(CargoStatus entity) {
-        throw new UnsupportedOperationException("Delete operation is not supported for CargoStatus");
+        throw new UnsupportedOperationException("Delete operation is not supported for unwritable entities");
     }
 }
