@@ -3,8 +3,6 @@ package dev.haguel.dds.service;
 import dev.haguel.dds.DTO.VehicleDTO;
 import dev.haguel.dds.dao.VehicleRepository;
 import dev.haguel.dds.exception.VehicleNotFoundException;
-import dev.haguel.dds.model.CargoOrder;
-import dev.haguel.dds.model.Driver;
 import dev.haguel.dds.model.Vehicle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +36,7 @@ public class VehicleService {
         vehicleRepository.save(vehicle);
     }
 
-    public void resetBreakStatus(Vehicle vehicle) {
+    public void resetBrokenStatus(Vehicle vehicle) {
         vehicle.setBroken(false);
         vehicleRepository.save(vehicle);
     }

@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class    CargoOrderService {
+public class CargoOrderService {
     private final CargoOrderRepository cargoOrderRepository;
     private final CargoStatusService cargoStatusService;
     private final DestinationService destinationService;
@@ -30,7 +30,7 @@ public class    CargoOrderService {
         cargoOrder.setDriver(null);
         cargoOrder.setVehicle(null);
 
-        cargoOrderRepository.delete(cargoOrderRepository.save(cargoOrder));
+        deleteOrder(cargoOrder);
     }
 
     public CargoOrder createOrder(CargoOrderDTO cargoOrderDTO)
@@ -71,6 +71,10 @@ public class    CargoOrderService {
     public CargoOrder getOrderById(Long id) throws CargoOrderNotFoundException {
         return cargoOrderRepository.findById(id)
                 .orElseThrow(() -> new CargoOrderNotFoundException("Cargo order with id " + id + " not found"));
+    }
+
+    public void deleteOrder(CargoOrder cargoOrder) {
+        cargoOrderRepository.delete(cargoOrder);
     }
 
 

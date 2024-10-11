@@ -14,15 +14,18 @@
 <p><strong>Min Experience Required (months):</strong> <span th:text="${order.minExperienceRequired}"></span></p>
 <p><strong>Status:</strong> <span th:text="${order.getCargoStatus().status}"></span></p>
 <h2>Driver info</h2>
+<p><strong>Id</strong> <span th:text="${order.driver.id}"></span></p>
 <p><strong>Name</strong> <span th:text="${order.driver.name}"></span></p>
 <p><strong>Surname</strong> <span th:text="${order.driver.surname}"></span></p>
 <p><strong>Experience</strong> <span th:text="${order.driver.experience}"></span></p>
 <h2>Vehicle info</h2>
+<p><strong>Id</strong> <span th:text="${order.vehicle.id}"></span></p>
 <p><strong>Manufacturer</strong> <span th:text="${order.vehicle.manufacturer}"></span></p>
 <p><strong>Model</strong> <span th:text="${order.vehicle.model}"></span></p>
 <p><strong>Total payload</strong> <span th:text="${order.vehicle.payload}"></span></p>
 <p><strong>Status</strong> <span th:text="${order.vehicle.isBroken()}"></span></p>
 <h2>Destination Info</h2>
+<p><strong>Id</strong> <span th:text="${order.destination.id}"></span></p>
 <p><strong>Country</strong> <span th:text="${order.destination.country}"></span></p>
 <p><strong>City</strong> <span th:text="${order.destination.city}"></span></p>
 <p><strong>Address</strong> <span th:text="${order.destination.address}"></span></p>

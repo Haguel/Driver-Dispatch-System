@@ -17,6 +17,7 @@ public class EndPoints {
     public static final String CLEAR_DB = "/initializer/clearDb";
     public static final String INIT_DRIVERS = "/initializer/initDrivers";
     public static final String INIT_VEHICLES = "/initializer/initVehicles";
+    public static final String INIT_CARGO_ORDERS = "/initializer/initCargoOrders";
 
     public static final String GET_DRIVERS = "/drivers/get";
     public static final String GET_DRIVER = "/drivers/get/{id}";
@@ -80,6 +81,14 @@ public class EndPoints {
         model.addAttribute("createCargoOrderForm", EndPoints.CREATE_CARGO_ORDER_FORM);
         model.addAttribute("createVehicleForm", EndPoints.CREATE_VEHICLE_FORM);
         model.addAttribute("createDriverForm", EndPoints.CREATE_DRIVER_FORM);
+    }
+
+    public static void setInitializerMenuEndpoints(Model model) {
+        model.addAttribute("clearDbEndpoint", EndPoints.CLEAR_DB);
+        model.addAttribute("initDriversEndpoint", EndPoints.INIT_DRIVERS);
+        model.addAttribute("initVehiclesEndpoint", EndPoints.INIT_VEHICLES);
+        model.addAttribute("initVehiclesEndpoint", EndPoints.INIT_VEHICLES);
+        model.addAttribute("initCargoOrdersEndpoint", EndPoints.INIT_CARGO_ORDERS);
     }
 
     public static void setAuthMenuEndpoints(Model model) {

@@ -67,7 +67,7 @@ public class VehicleController {
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
             if (vehicle.isBroken()) {
-                vehicleService.resetBreakStatus(vehicle);
+                vehicleService.resetBrokenStatus(vehicle);
             } else {
                 vehicleService.setBrokenStatus(vehicle);
             }

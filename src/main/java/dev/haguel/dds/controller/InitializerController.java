@@ -17,9 +17,7 @@ public class InitializerController {
     @GetMapping(EndPoints.GET_INITIALIZER_MENU)
     public String showInitializerPage(Model model) {
         EndPoints.setMainMenuEndpoints(model);
-        model.addAttribute("clearDbEndpoint", EndPoints.CLEAR_DB);
-        model.addAttribute("initDriversEndpoint", EndPoints.INIT_DRIVERS);
-        model.addAttribute("initVehiclesEndpoint", EndPoints.INIT_VEHICLES);
+        EndPoints.setInitializerMenuEndpoints(model);
 
         return "initializer";
     }
@@ -31,7 +29,7 @@ public class InitializerController {
         EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Databased cleared successfully.");
 
-        return "initializer";
+        return "redirect:/initializer";
     }
 
     @PostMapping(EndPoints.INIT_DRIVERS)
@@ -41,7 +39,7 @@ public class InitializerController {
         EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Drivers initialized successfully.");
 
-        return "initializer";
+        return "redirect:/initializer";
     }
 
     @PostMapping(EndPoints.INIT_VEHICLES)
@@ -51,6 +49,16 @@ public class InitializerController {
         EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Vehicles initialized successfully.");
 
-        return "initializer";
+        return "redirect:/initializer";
+    }
+
+    @PostMapping(EndPoints.INIT_CARGO_ORDERS)
+    public String initializeCargoOrders(Model model) {
+        initializerService.initCargoOrders();
+
+        EndPoints.setMainMenuEndpoints(model);
+        model.addAttribute("message", "Cargo orders initialized successfully.");
+
+        return "redirect:/initializer";
     }
 }

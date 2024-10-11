@@ -16,7 +16,7 @@ public class CargoOrderFactory {
         int cargoAmount = 100 + random.nextInt(901);
         int payout = 500 + random.nextInt(501);
         short daysToComplete = (short) (1 + random.nextInt(10));
-        short minExperienceRequired = (short) (random.nextInt(24));
+        short minExperienceRequired = (short) (random.nextInt(80));
         DestinationDTO destinationDTO = DestinationFactory.createDestination();
 
         return new CargoOrderDTO(cargoType, cargoAmount, payout,

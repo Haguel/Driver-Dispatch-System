@@ -1,9 +1,14 @@
 package dev.haguel.dds.service;
 
+import dev.haguel.dds.DTO.CargoOrderDTO;
 import dev.haguel.dds.DTO.DriverDTO;
 import dev.haguel.dds.DTO.VehicleDTO;
+import dev.haguel.dds.exception.DriverNotFoundException;
+import dev.haguel.dds.exception.VehicleNotFoundException;
+import dev.haguel.dds.factory.CargoOrderFactory;
 import dev.haguel.dds.factory.DriverFactory;
 import dev.haguel.dds.factory.VehicleFactory;
+import dev.haguel.dds.model.CargoOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +24,7 @@ public class InitializerService {
     private final EntityManager entityManager;
     private final DriverService driverService;
     private final VehicleService vehicleService;
+    private final CargoOrderService cargoOrderService;
 
     public void clearDb() {
         entityManager.createNativeQuery("TRUNCATE TABLE cargo_order, destination, vehicle, driver CASCADE").executeUpdate();
@@ -37,6 +43,19 @@ public class InitializerService {
             VehicleDTO vehicleDTO = VehicleFactory.createVehicle();
 
             vehicleService.createVehicle(vehicleDTO);
+        }
+    }
+
+    public void initCargoOrders() {
+        for(int i = 0; i < 100; i++) {
+            CargoOrderDTO cargoOrderDTO = CargoOrderFactory.createCargoOrder();
+
+            CargoOrder cargoOrder = new CargoOrder();
+            try {
+                cargoOrder = cargoOrderService.createOrder(cargoOrderDTO);
+            } catch (VehicleNotFoundException | DriverNotFoundException exception) {
+                cargoOrderService.deleteOrder(cargoOrder);
+            }
         }
     }
 }

@@ -30,6 +30,7 @@
         <td th:text="${order.cargoType}"></td>
         <td th:text="${order.cargoAmount}"></td>
         <td th:text="${order.daysTillComplete}"></td>
+        <td th:text="${order.getCargoStatus().getStatus()}"></td>
         <td>
             <a th:href="@{${getCargoOrderEndpoint}(id = ${order.id})}">View</a>
         </td>

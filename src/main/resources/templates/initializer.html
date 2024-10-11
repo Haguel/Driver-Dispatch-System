@@ -11,13 +11,16 @@
 </div>
 
 <form th:action="@{${clearDbEndpoint}}" method="post">
-    <button type="submit">Clear Database</button>
+    <button type="submit">Clear database</button>
 </form>
 <form th:action="@{${initDriversEndpoint}}" method="post">
-    <button type="submit">Initialize Drivers</button>
+    <button type="submit">Initialize drivers</button>
 </form>
 <form th:action="@{${initVehiclesEndpoint}}" method="post">
-    <button type="submit">Initialize Vehicles</button>
+    <button type="submit">Initialize vehicles</button>
+</form>
+<form th:action="@{${initCargoOrdersEndpoint}}" method="post">
+    <button type="submit">Initialize cargo orders</button>
 </form>
 </body>
 </html>
