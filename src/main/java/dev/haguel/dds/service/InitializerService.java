@@ -5,9 +5,9 @@ import dev.haguel.dds.DTO.DriverDTO;
 import dev.haguel.dds.DTO.VehicleDTO;
 import dev.haguel.dds.exception.DriverNotFoundException;
 import dev.haguel.dds.exception.VehicleNotFoundException;
-import dev.haguel.dds.factory.CargoOrderFactory;
-import dev.haguel.dds.factory.DriverFactory;
-import dev.haguel.dds.factory.VehicleFactory;
+import dev.haguel.dds.factory.CargoOrderDTOFactory;
+import dev.haguel.dds.factory.DriverDTOFactory;
+import dev.haguel.dds.factory.VehicleDTOFactory;
 import dev.haguel.dds.model.CargoOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class InitializerService {
 
     public void initDrivers() {
         for(int i = 0; i < 100; i++) {
-            DriverDTO driverDTO = DriverFactory.createDriver();
+            DriverDTO driverDTO = DriverDTOFactory.createDriver();
 
             driverService.createDriver(driverDTO);
         }
@@ -40,7 +40,7 @@ public class InitializerService {
 
     public void initVehicles() {
         for(int i = 0; i < 100; i++) {
-            VehicleDTO vehicleDTO = VehicleFactory.createVehicle();
+            VehicleDTO vehicleDTO = VehicleDTOFactory.createVehicle();
 
             vehicleService.createVehicle(vehicleDTO);
         }
@@ -48,7 +48,7 @@ public class InitializerService {
 
     public void initCargoOrders() {
         for(int i = 0; i < 100; i++) {
-            CargoOrderDTO cargoOrderDTO = CargoOrderFactory.createCargoOrder();
+            CargoOrderDTO cargoOrderDTO = CargoOrderDTOFactory.createCargoOrder();
 
             CargoOrder cargoOrder = new CargoOrder();
             try {

@@ -3,6 +3,8 @@ package dev.haguel.dds.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,33 +19,55 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "driver_name", nullable = false)
+    @Column(nullable = false)
     private String driverName;
 
-    @Column(name = "driver_surname", nullable = false)
+    @Column(nullable = false)
     private String driverSurname;
 
-    @Column(name = "vehicle_manufacturer", nullable = false)
+    @Column(nullable = false)
     private String vehicleManufacturer;
 
-    @Column(name = "vehicle_model", nullable = false)
+    @Column(nullable = false)
     private String vehicleModel;
 
-    @Column(name = "cargo_amount", nullable = false)
+    @Column(nullable = false)
     private double cargoAmount;
 
-    @Column(name = "payout", nullable = false)
+    @Column(nullable = false)
     private double payout;
 
-    @Column(name = "cargo_type", nullable = false)
+    @Column(nullable = false)
     private String cargoType;
 
-    @Column(name = "destination_city", nullable = false)
+    @Column(nullable = false)
     private String destinationCity;
 
-    @Column(name = "destination_country", nullable = false)
+    @Column(nullable = false)
     private String destinationCountry;
 
-    @Column(name = "modified_at", nullable = false)
-    private LocalDateTime modifiedAt;
+    @Column(nullable = false)
+    private String destinationAddress;
+
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    public History(String driverName, String driverSurname, String vehicleManufacturer, String vehicleModel,
+                   double cargoAmount, double payout, String cargoType, String destinationCity, String destinationCountry, String destinationAddress) {
+        this.driverName = driverName;
+        this.driverSurname = driverSurname;
+        this.vehicleManufacturer = vehicleManufacturer;
+        this.vehicleModel = vehicleModel;
+        this.cargoAmount = cargoAmount;
+        this.payout = payout;
+        this.cargoType = cargoType;
+        this.destinationCity = destinationCity;
+        this.destinationCountry = destinationCountry;
+        this.destinationAddress = destinationAddress;
+    }
 }

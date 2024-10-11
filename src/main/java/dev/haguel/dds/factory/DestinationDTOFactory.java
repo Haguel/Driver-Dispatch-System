@@ -4,7 +4,7 @@ import dev.haguel.dds.DTO.DestinationDTO;
 
 import java.util.Random;
 
-public class DestinationFactory {
+public class DestinationDTOFactory {
     private static final String[][] DESTINATIONS = {
             {"USA", "New York"},
             {"Germany", "Berlin"},

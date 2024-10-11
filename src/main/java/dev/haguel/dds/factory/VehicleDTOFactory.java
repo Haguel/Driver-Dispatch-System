@@ -4,7 +4,7 @@ import dev.haguel.dds.DTO.VehicleDTO;
 
 import java.util.Random;
 
-public class VehicleFactory {
+public class VehicleDTOFactory {
     private static final String[][] VEHICLES = {
             {"Volvo", "FH16", "FMX"},
             {"Scania", "R-Series", "S-Series"},

@@ -2,11 +2,12 @@ package dev.haguel.dds.util;
 
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EndPoints {
     public static final String GET_MAIN_PAGE = "/main";
+
+    public static final String GET_HISTORY_PAGE = "/history";
 
     public static final String GET_AUTH_MENU_PAGE = "/";
     public static final String GET_LOGIN_PAGE = "/login/get";
@@ -63,9 +64,11 @@ public class EndPoints {
     public static List<String> getAdminEndpoints() {
         return List.of(
                 GET_INITIALIZER_MENU,
+                GET_HISTORY_PAGE,
                 CLEAR_DB,
                 INIT_DRIVERS,
                 INIT_VEHICLES,
+                INIT_CARGO_ORDERS,
                 CREATE_VEHICLE_FORM,
                 CREATE_VEHICLE,
                 CREATE_DRIVER_FORM,
@@ -81,6 +84,7 @@ public class EndPoints {
         model.addAttribute("createCargoOrderForm", EndPoints.CREATE_CARGO_ORDER_FORM);
         model.addAttribute("createVehicleForm", EndPoints.CREATE_VEHICLE_FORM);
         model.addAttribute("createDriverForm", EndPoints.CREATE_DRIVER_FORM);
+        model.addAttribute("historyPage", EndPoints.GET_HISTORY_PAGE);
     }
 
     public static void setInitializerMenuEndpoints(Model model) {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>History</title>
+</head>
+<body>
+<div th:insert="fragments/mainManu :: mainMenu"></div>
+<h1>History</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Driver Name</th>
+        <th>Driver Surname</th>
+        <th>Vehicle Manufacturer</th>
+        <th>Vehicle Model</th>
+        <th>Cargo Amount</th>
+        <th>Payout</th>
+        <th>Cargo Type</th>
+        <th>Destination City</th>
+        <th>Destination Country</th>
+        <th>Destination Address</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="history : ${historyList}">
+        <td th:text="${history.id}">ID</td>
+        <td th:text="${history.driverName}">Driver Name</td>
+        <td th:text="${history.driverSurname}">Driver Surname</td>
+        <td th:text="${history.vehicleManufacturer}">Vehicle Manufacturer</td>
+        <td th:text="${history.vehicleModel}">Vehicle Model</td>
+        <td th:text="${history.cargoAmount}">Cargo Amount</td>
+        <td th:text="${history.payout}">Payout</td>
+        <td th:text="${history.cargoType}">Cargo Type</td>
+        <td th:text="${history.destinationCity}">Destination City</td>
+        <td th:text="${history.destinationCountry}">Destination Country</td>
+        <td th:text="${history.destinationAddress}">Destination Address</td>
+        <td th:text="${history.createdAt}">Created At</td>
+        <td th:text="${history.updatedAt}">Updated At</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

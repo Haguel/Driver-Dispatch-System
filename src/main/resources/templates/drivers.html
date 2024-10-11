@@ -27,6 +27,7 @@
     <tr th:each="driver : ${drivers}">
         <td th:text="${driver.id}"></td>
         <td th:text="${driver.name}"></td>
+        <td th:text="${driver.surname}"></td>
         <td th:text="${driver.experience}"></td>
         <td>
             <a th:href="@{${getDriverEndpoint}(id=${driver.id})}">View</a>

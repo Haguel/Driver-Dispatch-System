@@ -5,7 +5,7 @@ import dev.haguel.dds.DTO.DriverDTO;
 import java.sql.Date;
 import java.util.Random;
 
-public class DriverFactory {
+public class DriverDTOFactory {
     private static final String[] NAMES = {"John", "Emily", "Michael", "Sophia", "James", "Olivia"};
     private static final String[] SURNAMES = {"Smith", "Johnson", "Brown", "Taylor", "Anderson", "White"};
     private static final Random random = new Random();

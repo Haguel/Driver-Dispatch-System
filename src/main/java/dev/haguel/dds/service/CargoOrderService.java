@@ -1,6 +1,7 @@
 package dev.haguel.dds.service;
 
 import dev.haguel.dds.DTO.CargoOrderDTO;
+import dev.haguel.dds.DTO.HistoryDTO;
 import dev.haguel.dds.dao.CargoOrderRepository;
 import dev.haguel.dds.dao.CargoStatusRepository;
 import dev.haguel.dds.exception.CargoOrderNotFoundException;
@@ -22,15 +23,36 @@ public class CargoOrderService {
     private final DestinationService destinationService;
     private final DriverService driverService;
     private final VehicleService vehicleService;
+    private final HistoryService historyService;
 
     private void completeOrder(CargoOrder cargoOrder) {
         CargoStatus completedStatus = cargoStatusService.getCompletedStatus();
+
+        Driver driver = cargoOrder.getDriver();
+        Vehicle vehicle = cargoOrder.getVehicle();
+        Destination destination = cargoOrder.getDestination();
+
+        driverService.payout(driver, cargoOrder.getPayout());
+
+        HistoryDTO historyDTO = HistoryDTO.builder()
+                .driverName(driver.getName())
+                .driverSurname(driver.getSurname())
+                .vehicleManufacturer(vehicle.getManufacturer())
+                .vehicleModel(vehicle.getModel())
+                .cargoAmount(cargoOrder.getCargoAmount())
+                .payout(cargoOrder.getPayout())
+                .cargoType(cargoOrder.getCargoType())
+                .destinationCity(destination.getCity())
+                .destinationCountry(destination.getCountry())
+                .destinationAddress(destination.getAddress())
+                .build();
 
         cargoOrder.setCargoStatus(completedStatus);
         cargoOrder.setDriver(null);
         cargoOrder.setVehicle(null);
 
         deleteOrder(cargoOrder);
+        historyService.save(historyDTO);
     }
 
     public CargoOrder createOrder(CargoOrderDTO cargoOrderDTO)
@@ -56,6 +78,8 @@ public class CargoOrderService {
         cargoOrder.setCargoStatus(inProgressStatus);
         cargoOrder.setDriver(driver);
         cargoOrder.setVehicle(vehicle);
+
+
 
         return cargoOrderRepository.save(cargoOrder);
     }

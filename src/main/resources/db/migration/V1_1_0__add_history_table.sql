@@ -9,5 +9,7 @@ CREATE TABLE IF NOT EXISTS history (
        cargo_type VARCHAR(50) NOT NULL,
        destination_city VARCHAR(50) NOT NULL,
        destination_country VARCHAR(50) NOT NULL,
-       modified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+       destination_address VARCHAR(255) NOT NULL,
+       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+       updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

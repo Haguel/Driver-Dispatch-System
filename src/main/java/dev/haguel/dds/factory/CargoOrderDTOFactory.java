@@ -5,7 +5,7 @@ import dev.haguel.dds.DTO.DestinationDTO;
 
 import java.util.Random;
 
-public class CargoOrderFactory {
+public class CargoOrderDTOFactory {
     private static final String[] CARGO_TYPES = {"Food", "Electronics", "Furniture", "Clothing", "Raw Materials"};
     private static final Random random = new Random();
 
@@ -17,7 +17,7 @@ public class CargoOrderFactory {
         int payout = 500 + random.nextInt(501);
         short daysToComplete = (short) (1 + random.nextInt(10));
         short minExperienceRequired = (short) (random.nextInt(80));
-        DestinationDTO destinationDTO = DestinationFactory.createDestination();
+        DestinationDTO destinationDTO = DestinationDTOFactory.createDestination();
 
         return new CargoOrderDTO(cargoType, cargoAmount, payout,
                 daysToComplete, minExperienceRequired, destinationDTO);

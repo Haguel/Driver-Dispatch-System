@@ -36,4 +36,10 @@ public class DriverService {
         return driverRepository.findFreeDriverSuitableForExperience(minExperienceRequired)
                 .orElseThrow(() -> new DriverNotFoundException("No driver with required experience found"));
     }
+
+    public void payout(Driver driver, int amount) {
+        driver.setTotalPayouts(driver.getTotalPayouts() + amount);
+
+        driverRepository.save(driver);
+    }
 }

@@ -5,9 +5,7 @@ import dev.haguel.dds.exception.CargoOrderNotFoundException;
 import dev.haguel.dds.exception.DriverNotFoundException;
 import dev.haguel.dds.exception.VehicleNotFoundException;
 import dev.haguel.dds.model.CargoOrder;
-import dev.haguel.dds.model.Driver;
-import dev.haguel.dds.model.Vehicle;
-import dev.haguel.dds.test_factory.CargoOrderDTOFactory;
+import dev.haguel.dds.test_factory.TestCargoOrderDTOFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,9 +42,9 @@ class CargoOrderServiceTest {
     @Test
     @DisplayName("Should create and return order with given valid DTO")
     void should_creteOrder_when_validDto() {
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
 
         Mockito.verify(cargoOrderRepository, Mockito.times(6))
                 .save(Mockito.any(CargoOrder.class));
@@ -59,11 +57,11 @@ class CargoOrderServiceTest {
                 .thenThrow(DriverNotFoundException.class);
 
         assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
         assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
         assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
 
         Mockito.verify(cargoOrderRepository, Mockito.times(3))
                 .save(Mockito.any(CargoOrder.class));
@@ -78,11 +76,11 @@ class CargoOrderServiceTest {
                 .save(Mockito.any(CargoOrder.class));
 
         assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
         assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
         assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(CargoOrderDTOFactory.createRandomCargoOrderDTO()));
+                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
 
         Mockito.verify(cargoOrderRepository, Mockito.times(3))
                 .save(Mockito.any(CargoOrder.class));

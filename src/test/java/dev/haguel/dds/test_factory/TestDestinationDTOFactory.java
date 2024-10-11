@@ -7,7 +7,7 @@ import java.util.Random;
 
 import static java.util.Map.entry;
 
-public class DestinationDTOFactory {
+public class TestDestinationDTOFactory {
     private static final Map<String, String[]> COUNTRY_CITY_MAP = Map.ofEntries(
             entry("Germany", new String[]{"Berlin", "Frankfurt", "Munich"}),
             entry("France", new String[]{"Paris", "Lyon", "Marseille"}),

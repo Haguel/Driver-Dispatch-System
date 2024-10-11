@@ -38,7 +38,7 @@ public class CargoDeliverySimulator {
             }
         });
 
-        inProgressOrders.forEach(cargoOrder -> {
+        pausedOrders.forEach(cargoOrder -> {
             if(random.nextInt(100) < 70) { // 70% chance of completion
                 vehicleService.resetBrokenStatus(cargoOrder.getVehicle());
                 cargoOrderService.resumeOrder(cargoOrder);
