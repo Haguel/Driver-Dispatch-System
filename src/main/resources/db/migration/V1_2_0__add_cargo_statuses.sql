@@ -1,5 +1,5 @@
-INSERT INTO cargo_status(id, status)
+INSERT INTO cargo_status(status)
 VALUES
-    (1, 'not started'),
-    (2, 'in progress'),
-    (3, 'completed');
+    ('not started'),
+    ('in progress'),
+    ('completed');

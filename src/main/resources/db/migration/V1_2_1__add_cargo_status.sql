@@ -1,3 +1,3 @@
-INSERT INTO cargo_status(id, status)
+INSERT INTO cargo_status(status)
 VALUES
-    (4, 'paused')
+    ('paused')

@@ -24,7 +24,7 @@ public class AppUserRoleSerializer extends StdSerializer<Set<AppUserRole>> {
         for (AppUserRole role : roles) {
             gen.writeStartObject();
             gen.writeNumberField("id", role.getId());
-            gen.writeStringField("roleName", role.getRole().getRoleName());
+            gen.writeStringField("roleName", role.getRole().getRoleName().name());
             gen.writeEndObject();
         }
         gen.writeEndArray();

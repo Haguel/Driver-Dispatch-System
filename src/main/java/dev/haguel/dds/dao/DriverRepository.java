@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query(value = "SELECT * FROM driver d " +
@@ -14,5 +15,5 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
             "ORDER BY d.experience " +
             "LIMIT 1",
             nativeQuery = true)
-    Driver findFreeDriverSuitableForExperience(@Param("experience") short experience);
+    Optional<Driver> findFreeDriverSuitableForExperience(@Param("experience") short experience);
 }

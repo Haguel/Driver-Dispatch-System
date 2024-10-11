@@ -1,5 +1,6 @@
 package dev.haguel.dds.model;
 
+import dev.haguel.dds.enumeration.Roles;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,5 +16,6 @@ public class Role {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String roleName;
+    @Enumerated(EnumType.STRING)
+    private Roles roleName;
 }

@@ -18,7 +18,6 @@ import java.util.List;
 public class VehicleService {
     private final VehicleRepository vehicleRepository;
 
-
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicle = new Vehicle(vehicleDTO.getManufacturer(), vehicleDTO.getModel(), vehicleDTO.getPayload());
 
@@ -44,7 +43,8 @@ public class VehicleService {
         vehicleRepository.save(vehicle);
     }
 
-    public Vehicle getFreeVehicleByPayload(int cargoAmount) {
-        return vehicleRepository.findVehicleSuitableForPayload(cargoAmount);
+    public Vehicle getFreeVehicleByPayload(int cargoAmount) throws VehicleNotFoundException {
+        return vehicleRepository.findVehicleSuitableForPayload(cargoAmount)
+                .orElseThrow(() -> new VehicleNotFoundException("No vehicle with required payload found"));
     }
 }

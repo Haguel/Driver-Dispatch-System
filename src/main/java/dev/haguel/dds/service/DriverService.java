@@ -32,7 +32,8 @@ public class DriverService {
                 .orElseThrow(() -> new DriverNotFoundException("Driver with id " + id + " not found"));
     }
 
-    public Driver getFreeDriverByExperience(short minExperienceRequired) {
-        return driverRepository.findFreeDriverSuitableForExperience(minExperienceRequired);
+    public Driver getFreeDriverByExperience(short minExperienceRequired) throws DriverNotFoundException {
+        return driverRepository.findFreeDriverSuitableForExperience(minExperienceRequired)
+                .orElseThrow(() -> new DriverNotFoundException("No driver with required experience found"));
     }
 }

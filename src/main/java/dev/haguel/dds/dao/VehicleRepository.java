@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT * FROM vehicle v " +
             "WHERE v.id NOT IN (SELECT co.vehicle_id FROM cargo_order co WHERE co.vehicle_id IS NOT NULL)" +
@@ -13,5 +15,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
             "ORDER BY v.payload " +
             "LIMIT 1",
             nativeQuery = true)
-    Vehicle findVehicleSuitableForPayload(@Param("payload") int payload);
+    Optional<Vehicle> findVehicleSuitableForPayload(@Param("payload") int payload);
 }

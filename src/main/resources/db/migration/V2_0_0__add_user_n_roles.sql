@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS app_user_role (
     FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE
 );
 
-INSERT INTO role (id, role_name) VALUES (1, 'DISPATCHER'), (2, 'ADMIN');
+INSERT INTO role (role_name) VALUES ('ROLE_DISPATCHER'), ('ROLE_ADMIN');

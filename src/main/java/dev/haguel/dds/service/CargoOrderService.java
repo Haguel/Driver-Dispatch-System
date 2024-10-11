@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class CargoOrderService {
+public class    CargoOrderService {
     private final CargoOrderRepository cargoOrderRepository;
     private final CargoStatusService cargoStatusService;
     private final DestinationService destinationService;
@@ -50,9 +50,7 @@ public class CargoOrderService {
         cargoOrderRepository.save(cargoOrder);
 
         Driver driver = driverService.getFreeDriverByExperience(cargoOrderDTO.getMinExperienceRequired());
-        if(driver == null) throw new DriverNotFoundException("No driver with required experience found");
         Vehicle vehicle = vehicleService.getFreeVehicleByPayload(cargoOrderDTO.getCargoAmount());
-        if(vehicle == null) throw new VehicleNotFoundException("No vehicle with required payload found");
         CargoStatus inProgressStatus = cargoStatusService.getInProgressStatus();
 
         cargoOrder.setCargoStatus(inProgressStatus);
@@ -91,7 +89,6 @@ public class CargoOrderService {
     }
 
     public void passDay(CargoOrder cargoOrder) {
-        System.out.println(cargoOrder);
         short daysToComplete = cargoOrder.getDaysTillComplete();
         daysToComplete--;
         cargoOrder.setDaysTillComplete(daysToComplete);
