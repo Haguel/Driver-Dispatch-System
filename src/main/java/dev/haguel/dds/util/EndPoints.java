@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndPoints {
-    public static final String MENU = "/menu/get";
+    public static final String GET_MAIN_PAGE = "/main";
 
-    public static final String MAIN = "/";
-    public static final String LOGIN = "/login";
+    public static final String GET_AUTH_MENU_PAGE = "/";
+    public static final String GET_LOGIN_PAGE = "/login/get";
+    public static final String GET_SIGN_UP_PAGE = "/sign-up/get";
+    public static final String SIGN_UP = "/sign-up";
 
     public static final String GET_INITIALIZER_MENU = "/initializer";
     public static final String CLEAR_DB = "/initializer/clearDb";
@@ -32,23 +34,45 @@ public class EndPoints {
     public static final String CREATE_VEHICLE_FORM = "/vehicles/create/form";
     public static final String HANDLE_BROKEN_STATUS = "/vehicles/{id}/broken-status";
 
-    private static List<String> getDriverEndpoints() {
-        return List.of(GET_DRIVERS, GET_DRIVER, CREATE_DRIVER, CREATE_DRIVER_FORM);
+    public static List<String> getAuthEndpoints() {
+        return List.of(
+                GET_AUTH_MENU_PAGE,
+                GET_LOGIN_PAGE,
+                GET_SIGN_UP_PAGE,
+                SIGN_UP
+        );
     }
 
-    private static List<String> getCargoOrderEndpoints() {
-        return List.of(GET_CARGO_ORDERS, GET_CARGO_ORDER, CREATE_CARGO_ORDER, CREATE_CARGO_ORDER_FORM);
-    }
 
-    private static List<String> getVehicleEndpoints() {
-        return List.of(GET_VEHICLES, GET_VEHICLE, CREATE_VEHICLE, CREATE_VEHICLE_FORM, HANDLE_BROKEN_STATUS);
-    }
+    public static List<String> getDispatcherEndpoints() {
+        return List.of(
+                GET_MAIN_PAGE,
+                GET_DRIVERS,
+                GET_DRIVER,
+                GET_CARGO_ORDERS,
+                GET_CARGO_ORDER,
+                GET_VEHICLES,
+                GET_VEHICLE,
+                CREATE_CARGO_ORDER,
+                CREATE_CARGO_ORDER_FORM,
+                HANDLE_BROKEN_STATUS
+        );
+    };
 
-    private static List<String> getInitializerEndpoints() {
-        return List.of(GET_INITIALIZER_MENU, CLEAR_DB, INIT_DRIVERS, INIT_VEHICLES);
-    }
+    public static List<String> getAdminEndpoints() {
+        return List.of(
+                GET_INITIALIZER_MENU,
+                CLEAR_DB,
+                INIT_DRIVERS,
+                INIT_VEHICLES,
+                CREATE_VEHICLE_FORM,
+                CREATE_VEHICLE,
+                CREATE_DRIVER_FORM,
+                CREATE_DRIVER
+        );
+    };
 
-    public static void setMenuEndpoints(Model model) {
+    public static void setMainMenuEndpoints(Model model) {
         model.addAttribute("initializerMenu", EndPoints.GET_INITIALIZER_MENU);
         model.addAttribute("getCargoOrders", EndPoints.GET_CARGO_ORDERS);
         model.addAttribute("getVehicles", EndPoints.GET_VEHICLES);
@@ -58,20 +82,8 @@ public class EndPoints {
         model.addAttribute("createDriverForm", EndPoints.CREATE_DRIVER_FORM);
     }
 
-    public static List<String> getDispatcherEndpoints() {
-        List<String> dispatcherEndpoints = new ArrayList<>();
-        dispatcherEndpoints.addAll(getDriverEndpoints());
-        dispatcherEndpoints.addAll(getCargoOrderEndpoints());
-        dispatcherEndpoints.addAll(getVehicleEndpoints());
-        dispatcherEndpoints.add(MENU);
-
-        return dispatcherEndpoints;
-    };
-
-    public static List<String> getAdminEndpoints() {
-        List<String> adminEndpoints = new ArrayList<>();
-        adminEndpoints.addAll(getInitializerEndpoints());
-
-        return adminEndpoints;
-    };
+    public static void setAuthMenuEndpoints(Model model) {
+        model.addAttribute("loginPage", EndPoints.GET_LOGIN_PAGE);
+        model.addAttribute("signUpPage", EndPoints.GET_SIGN_UP_PAGE);
+    }
 }

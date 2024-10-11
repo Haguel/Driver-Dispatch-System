@@ -26,7 +26,7 @@ public class DriverController {
 
     @GetMapping(EndPoints.GET_DRIVERS)
     public String getAllDrivers(Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("drivers", driverService.getDrivers());
         model.addAttribute("getDriverEndpoint", EndPoints.GET_DRIVER);
 
@@ -35,7 +35,7 @@ public class DriverController {
 
     @GetMapping(EndPoints.GET_DRIVER)
     public String getDriverById(@PathVariable("id") Long id, Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         try {
             Driver driver = driverService.getDriversById(id);
 
@@ -52,7 +52,7 @@ public class DriverController {
 
     @GetMapping(EndPoints.CREATE_DRIVER_FORM)
     public String createDriverForm(Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("driverDTO", new DriverDTO());
         model.addAttribute("createDriverEndpoint", EndPoints.CREATE_DRIVER);
 

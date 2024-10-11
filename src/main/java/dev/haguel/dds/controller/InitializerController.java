@@ -16,7 +16,7 @@ public class InitializerController {
 
     @GetMapping(EndPoints.GET_INITIALIZER_MENU)
     public String showInitializerPage(Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("clearDbEndpoint", EndPoints.CLEAR_DB);
         model.addAttribute("initDriversEndpoint", EndPoints.INIT_DRIVERS);
         model.addAttribute("initVehiclesEndpoint", EndPoints.INIT_VEHICLES);
@@ -28,7 +28,7 @@ public class InitializerController {
     public String clearDatabase(Model model) {
         initializerService.clearDb();
 
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Databased cleared successfully.");
 
         return "initializer";
@@ -38,7 +38,7 @@ public class InitializerController {
     public String initializeDrivers(Model model) {
         initializerService.initDrivers();
 
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Drivers initialized successfully.");
 
         return "initializer";
@@ -48,7 +48,7 @@ public class InitializerController {
     public String initializeVehicles(Model model) {
         initializerService.initVehicles();
 
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("message", "Vehicles initialized successfully.");
 
         return "initializer";

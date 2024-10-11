@@ -4,7 +4,7 @@
     <title>Create Vehicle</title>
 </head>
 <body>
-<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="fragments/mainManu :: mainMenu"></div>
 <h1>Create New Vehicle</h1>
 <form th:action="@{${createVehicleEndpoint}}" th:object="${vehicleDTO}" method="post">
     <label for="manufacturer">Manufacturer:</label>

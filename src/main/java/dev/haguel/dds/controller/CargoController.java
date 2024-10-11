@@ -22,7 +22,7 @@ public class CargoController {
     public String listCargoOrders(Model model) {
         List<CargoOrder> orders = cargoOrderService.getOrders();
 
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("orders", orders);
         model.addAttribute("getCargoOrderEndpoint", EndPoints.GET_CARGO_ORDER);
 
@@ -31,7 +31,7 @@ public class CargoController {
 
     @GetMapping(value = EndPoints.GET_CARGO_ORDER)
     public String viewCargoOrder(@PathVariable Long id, Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         try {
             CargoOrder order = cargoOrderService.getOrderById(id);
             model.addAttribute("order", order);
@@ -48,14 +48,14 @@ public class CargoController {
         CargoOrderDTO cargoOrderDTO = new CargoOrderDTO();
         cargoOrderDTO.setDestinationDTO(new DestinationDTO());
 
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("cargoOrderDTO", cargoOrderDTO);
         model.addAttribute("createOrderEndpoint", EndPoints.CREATE_CARGO_ORDER);
 
         return "createCargoOrder";
     }
 
-    @GetMapping(value = EndPoints.CREATE_CARGO_ORDER)
+    @PostMapping(value = EndPoints.CREATE_CARGO_ORDER)
     public String createCargoOrder(@ModelAttribute @Valid CargoOrderDTO cargoOrderDTO) {
         try {
             CargoOrder cargoOrder = cargoOrderService.createOrder(cargoOrderDTO);

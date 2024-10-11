@@ -19,7 +19,7 @@ public class VehicleController {
 
     @GetMapping(EndPoints.GET_VEHICLES)
     public String getAllVehicles(Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("vehicles", vehicleService.getVehicles());
         model.addAttribute("getVehicleEndpoint", EndPoints.GET_VEHICLE);
         model.addAttribute("getBrokenStatusHandlerEndpoint", EndPoints.HANDLE_BROKEN_STATUS);
@@ -29,7 +29,7 @@ public class VehicleController {
 
     @GetMapping(EndPoints.GET_VEHICLE)
     public String getVehicleById(@PathVariable("id") Long id, Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
 
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
@@ -47,7 +47,7 @@ public class VehicleController {
 
     @GetMapping(EndPoints.CREATE_VEHICLE_FORM)
     public String createVehicleForm(Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         model.addAttribute("vehicleDTO", new VehicleDTO());
         model.addAttribute("createVehicleEndpoint", EndPoints.CREATE_VEHICLE);
 
@@ -63,7 +63,7 @@ public class VehicleController {
 
     @PostMapping(EndPoints.HANDLE_BROKEN_STATUS)
     public String handleBrokenStatus(@PathVariable("id") Long id, Model model) {
-        EndPoints.setMenuEndpoints(model);
+        EndPoints.setMainMenuEndpoints(model);
         try {
             Vehicle vehicle = vehicleService.getVehicleById(id);
             if (vehicle.isBroken()) {

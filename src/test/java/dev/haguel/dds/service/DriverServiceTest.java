@@ -16,7 +16,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class DriverServiceTest {
+class  DriverServiceTest {
     @Mock
     private DriverRepository driverRepository;
 

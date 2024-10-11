@@ -4,7 +4,7 @@
     <title>Create Cargo Order</title>
 </head>
 <body>
-<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="fragments/mainManu :: mainMenu"></div>
 <h1>Create New Cargo Order</h1>
 <form th:action="@{${createOrderEndpoint}}" th:object="${cargoOrderDTO}" method="post">
     <label for="cargoType">Cargo Type:</label>

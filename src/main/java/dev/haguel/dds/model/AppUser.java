@@ -28,4 +28,9 @@ public class AppUser {
     @JsonSerialize(using = AppUserRoleSerializer.class)
     @OneToMany(mappedBy = "appUser", fetch = FetchType.EAGER)
     private Set<AppUserRole> appUserRoles;
+
+    public AppUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

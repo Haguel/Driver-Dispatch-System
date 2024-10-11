@@ -37,6 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         String adminRole = Roles.ROLE_ADMIN.name();
         String dispatcherRole = Roles.ROLE_DISPATCHER.name();
 
+        List<String> authEndpoints = EndPoints.getAuthEndpoints();
+        for (String endpoint : authEndpoints) {
+            http.authorizeRequests().mvcMatchers(endpoint).permitAll();
+        }
+
         List<String> adminEndpoints = EndPoints.getAdminEndpoints();
         for (String endpoint : adminEndpoints) {
             http.authorizeRequests().mvcMatchers(endpoint)
@@ -53,8 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
-                .loginPage(EndPoints.LOGIN)
-                .defaultSuccessUrl(EndPoints.MENU)
+                .loginPage(EndPoints.GET_LOGIN_PAGE)
+                .defaultSuccessUrl(EndPoints.GET_MAIN_PAGE)
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password").and()
