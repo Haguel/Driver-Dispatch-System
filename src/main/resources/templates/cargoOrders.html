@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="fragments/tableHeadProperties :: tableHeadProperties">
     <title>Cargo Orders</title>
     <style>
         th {
@@ -14,13 +14,14 @@
 <body>
 <div th:insert="fragments/mainManu :: mainMenu"></div>
 <h1>All Cargo Orders</h1>
-<table>
+<table class="table table-striped" id="dataTable" data-page-length='50'>
     <thead>
     <tr>
         <th>ID</th>
         <th>Cargo Type</th>
         <th>Cargo Amount</th>
         <th>Days Till Complete</th>
+        <th>Status</th>
         <th>Actions</th>
     </tr>
     </thead>

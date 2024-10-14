@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="fragments/basicHeadProperties :: basicHeadProperties">
     <title>Login</title>
 </head>
 <body>
 <div th:insert="fragments/authMenu :: authMenu"></div>
 <h1>Login</h1>
-<h3>Enter user name and password:</h3>
+<h3>Enter username and password:</h3>
 <form name='login' th:action="@{/j_spring_security_check}" method='POST'>
     <table>
         <tr>

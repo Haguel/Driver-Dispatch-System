@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="fragments/tableHeadProperties :: tableHeadProperties">
     <title>Drivers</title>
     <style>
-        th {
-            padding: 10px;
-        }
-        td {
+        th, td {
             padding: 10px;
         }
     </style>
@@ -14,13 +11,15 @@
 <body>
 <div th:insert="fragments/mainManu :: mainMenu"></div>
 <h1>All Drivers</h1>
-<table>
+<table class="table table-striped" id="dataTable" data-page-length='50'>
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Experience</th>
-        <th>Actions</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Experience</th>
+        <th scope="col">Total payouts</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +28,7 @@
         <td th:text="${driver.name}"></td>
         <td th:text="${driver.surname}"></td>
         <td th:text="${driver.experience}"></td>
+        <td th:text="${driver.totalPayouts}"></td>
         <td>
             <a th:href="@{${getDriverEndpoint}(id=${driver.id})}">View</a>
         </td>
