@@ -1,4 +1,4 @@
-package dev.haguel.dds.component;
+package dev.haguel.dds.simulator;
 
 import dev.haguel.dds.model.CargoOrder;
 import dev.haguel.dds.model.CargoStatus;

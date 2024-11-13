@@ -19,12 +19,15 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping(EndPoints.GET_LOGIN_PAGE)
-    public String getLoginPage() {
+    public String getLoginPage(Model model) {
+        EndPoints.setAuthMenuEndpoints(model);
+
         return "login";
     }
 
     @GetMapping(EndPoints.GET_SIGN_UP_PAGE)
     public String getSignUpPage(Model model) {
+        EndPoints.setAuthMenuEndpoints(model);
         model.addAttribute("signUpDto", new SignUpDTO());
         model.addAttribute("signUpEndpoint", EndPoints.SIGN_UP);
 

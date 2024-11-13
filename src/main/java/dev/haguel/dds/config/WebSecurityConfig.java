@@ -60,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage(EndPoints.GET_LOGIN_PAGE)
                 .defaultSuccessUrl(EndPoints.GET_MAIN_PAGE)
-                .failureUrl("/login?error=true")
+                .failureUrl(EndPoints.GET_LOGIN_PAGE + "?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password").and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .logout().logoutUrl("/logout").logoutSuccessUrl(EndPoints.GET_AUTH_MENU_PAGE);
     }
 }

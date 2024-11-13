@@ -26,8 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser appUser = this.appUserRepository.findAppUserByUsername(userName)
-                .orElseThrow(RuntimeException::new);
+        AppUser appUser = this.appUserRepository.findAppUserByUsername(userName).orElse(null);
 
         if (appUser == null) {
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
