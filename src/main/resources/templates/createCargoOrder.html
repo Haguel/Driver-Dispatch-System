@@ -6,6 +6,9 @@
 <body>
 <div th:insert="fragments/mainManu :: mainMenu"></div>
 <h1>Create New Cargo Order</h1>
+<div th:if="${error}">
+    <p style="color: red;" th:text="${error}"></p>
+</div>
 <form th:action="@{${createOrderEndpoint}}" th:object="${cargoOrderDTO}" method="post">
     <label for="cargoType">Cargo Type:</label>
     <input type="text" id="cargoType" th:field="*{cargoType}" required/>

@@ -5,6 +5,7 @@ import dev.haguel.dds.serializer.AppUserRoleSerializer;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -32,5 +33,6 @@ public class AppUser {
     public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
+        appUserRoles = new HashSet<>();
     }
 }

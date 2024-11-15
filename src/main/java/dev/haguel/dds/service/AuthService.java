@@ -8,6 +8,7 @@ import dev.haguel.dds.model.AppUser;
 import dev.haguel.dds.model.Role;
 import dev.haguel.dds.util.PasswordEncrypter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,7 +21,7 @@ public class AuthService {
     private final RoleService roleService;
     private final AppUserRoleService appUserRoleService;
 
-    public void signUp(SignUpDTO signUpDTO) throws RoleNotFoundException {
+    public void signUp(SignUpDTO signUpDTO) throws RoleNotFoundException, DataIntegrityViolationException {
         Role role = roleService.getRoleByRoleName(Roles.ROLE_DISPATCHER);
         String passwordHash = PasswordEncrypter.encryptPassword(signUpDTO.getPassword());
         AppUser appUser = appUserService.save(new AppUserDTO(signUpDTO.getUsername(), passwordHash));

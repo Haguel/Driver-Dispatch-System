@@ -39,10 +39,10 @@ public class VehicleController {
 
             return "vehicle";
         } catch (VehicleNotFoundException exception) {
-            model.addAttribute("error", exception.getMessage());
-
-            return "error";
+            model.addAttribute("error", "Something went wrong while trying to get the vehicle. Please try again later.");
         }
+
+        return getAllVehicles(model);
     }
 
     @GetMapping(EndPoints.CREATE_VEHICLE_FORM)

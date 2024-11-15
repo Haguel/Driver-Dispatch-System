@@ -44,10 +44,10 @@ public class DriverController {
 
             return "driver";
         } catch (DriverNotFoundException exception) {
-            model.addAttribute("error", exception.getMessage());
-
-            return "error";
+            model.addAttribute("error", "Something went wrong while trying to get the driver. Please try again later.");
         }
+
+        return getAllDrivers(model);
     }
 
     @GetMapping(EndPoints.CREATE_DRIVER_FORM)

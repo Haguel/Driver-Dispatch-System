@@ -2,6 +2,9 @@ package dev.haguel.dds.controller;
 
 import dev.haguel.dds.DTO.CargoOrderDTO;
 import dev.haguel.dds.DTO.DestinationDTO;
+import dev.haguel.dds.exception.CargoOrderNotFoundException;
+import dev.haguel.dds.exception.DriverNotFoundException;
+import dev.haguel.dds.exception.VehicleNotFoundException;
 import dev.haguel.dds.model.CargoOrder;
 import dev.haguel.dds.service.CargoOrderService;
 import dev.haguel.dds.util.EndPoints;
@@ -36,11 +39,13 @@ public class CargoController {
             CargoOrder order = cargoOrderService.getOrderById(id);
             model.addAttribute("order", order);
             model.addAttribute("getCargoOrdersEndpoint", EndPoints.GET_CARGO_ORDERS);
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
+
+            return "cargoOrder";
+        } catch (CargoOrderNotFoundException exception) {
+            model.addAttribute("error", "Something went wrong while trying to get the order. Please try again later.");
         }
 
-        return "cargoOrder";
+        return listCargoOrders(model);
     }
 
     @GetMapping(value = EndPoints.CREATE_CARGO_ORDER_FORM)
@@ -56,13 +61,17 @@ public class CargoController {
     }
 
     @PostMapping(value = EndPoints.CREATE_CARGO_ORDER)
-    public String createCargoOrder(@ModelAttribute @Valid CargoOrderDTO cargoOrderDTO) {
+    public String createCargoOrder(@ModelAttribute @Valid CargoOrderDTO cargoOrderDTO, Model model) {
         try {
             CargoOrder cargoOrder = cargoOrderService.createOrder(cargoOrderDTO);
 
             return "redirect:" + EndPoints.GET_CARGO_ORDER.replace("{id}", String.valueOf(cargoOrder.getId()));
-        } catch (Exception e) {
-            return "error";
+        } catch (DriverNotFoundException exception) {
+            model.addAttribute("error", "Appropriate driver not found. Please try again later or set another requirements.");
+        } catch (VehicleNotFoundException exception) {
+            model.addAttribute("error", "Appropriate vehicle not found. Please try again later or set another requirements..");
         }
+
+        return createCargoOrderForm(model);
     }
 }
