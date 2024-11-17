@@ -54,6 +54,53 @@ src/
 - **templates/**: Contains Thymeleaf templates for rendering web pages.
 - **fragments/**: Contains Thymeleaf fragments used in templates.
 
+### Docker Integration
+
+This project includes Docker support. The Docker setup consists of a multi-stage build to create the application image and a `docker-compose.yml` file to manage the services.
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Building and Running the Application
+
+1. **Build the Docker Image**:
+   ```sh
+   docker-compose build
+   ```
+
+2. **Start the Application**:
+   ```sh
+   docker-compose up
+   ```
+
+This will start the application along with the PostgreSQL database.
+
+### Environment Variables
+
+The application uses the following environment variables, which are defined in the `docker-compose.yml` file:
+
+- `SPRING_DATASOURCE_URL`
+- `SPRING_DATASOURCE_USERNAME`
+- `SPRING_DATASOURCE_PASSWORD`
+- `SPRING_FLYWAY_URL`
+- `SPRING_FLYWAY_USER`
+- `SPRING_FLYWAY_PASSWORD`
+
+### Accessing the Application
+
+Once the application is running, you can access it at `http://localhost:8080`. There you can login as `admin` with password `password`.
+
+### Stopping the Application
+
+To stop the application, run:
+```sh
+docker-compose down
+```
+
+This will stop and remove the containers defined in the `docker-compose.yml` file.
+
 ## External Libraries
 
 - [Spring Boot](https://spring.io/projects/spring-boot)

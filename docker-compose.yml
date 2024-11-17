@@ -1,0 +1,32 @@
+version: '3.8'
+
+volumes:
+    pg_dds:
+
+services:
+  dds_db:
+    image: postgres:12.0-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dds_db
+    volumes:
+      - pg_dds:/var/lib/postgresql/data
+    ports:
+        - "127.0.0.1:1234:5432"
+  dds:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dds_db
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://dds_db:5432/dds_db
+        SPRING_DATASOURCE_USERNAME: user
+        SPRING_DATASOURCE_PASSWORD: password
+        SPRING_FLYWAY_URL: jdbc:postgresql://dds_db:5432/dds_db
+        SPRING_FLYWAY_USER: user
+        SPRING_FLYWAY_PASSWORD: password
