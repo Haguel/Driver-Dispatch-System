@@ -23,7 +23,7 @@
 <p><strong>Manufacturer</strong> <span th:text="${order.vehicle.manufacturer}"></span></p>
 <p><strong>Model</strong> <span th:text="${order.vehicle.model}"></span></p>
 <p><strong>Total payload</strong> <span th:text="${order.vehicle.payload}"></span></p>
-<p><strong>Status</strong> <span th:text="${order.vehicle.isBroken()}"></span></p>
+<p><strong>Status</strong> <span th:text="${vehicle.broken ? 'Broken' : 'Operational'}"></span></p>
 <h2>Destination Info</h2>
 <p><strong>Id</strong> <span th:text="${order.destination.id}"></span></p>
 <p><strong>Country</strong> <span th:text="${order.destination.country}"></span></p>

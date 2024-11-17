@@ -10,6 +10,7 @@
 <p><strong>Manufacturer:</strong> <span th:text="${vehicle.manufacturer}"></span></p>
 <p><strong>Model:</strong> <span th:text="${vehicle.model}"></span></p>
 <p><strong>Payload:</strong> <span th:text="${vehicle.payload}"></span></p>
+<p><strong>Status:</strong> <span th:text="${vehicle.broken ? 'Broken' : 'Operational'}"></span></p>
 <a th:href="@{${getVehiclesEndpoint}}">Back to list</a>
 </body>
 </html>
