@@ -4,7 +4,7 @@
     <title>Create Vehicle</title>
 </head>
 <body>
-<div th:insert="fragments/mainManu :: mainMenu"></div>
+<div th:insert="fragments/mainNavbar :: mainNavbar"></div>
 <h1>Create New Vehicle</h1>
 <form th:action="@{${createVehicleEndpoint}}" th:object="${vehicleDTO}" method="post">
     <label for="manufacturer">Manufacturer:</label>
@@ -16,7 +16,7 @@
     <label for="payload">Payload:</label>
     <input type="number" id="payload" th:field="*{payload}" required/>
     <br/>
-    <button type="submit">Create</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
 </body>
 </html>

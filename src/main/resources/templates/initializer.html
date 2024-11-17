@@ -4,23 +4,23 @@
     <title>DDS Initializer</title>
 </head>
 <body>
-<div th:insert="fragments/mainManu :: mainMenu"></div>
-<h1>DDS Initializer</h1>
+<div th:insert="fragments/mainNavbar :: mainNavbar"></div>
+<h1>Database Initializer</h1>
 <div th:if="${message}" style="color: green;">
     <p th:text="${message}"></p>
 </div>
 
 <form th:action="@{${clearDbEndpoint}}" method="post">
-    <button type="submit">Clear database</button>
+    <button type="submit" class="btn btn-primary">Clear database</button>
 </form>
 <form th:action="@{${initDriversEndpoint}}" method="post">
-    <button type="submit">Initialize drivers</button>
+    <button type="submit" class="btn btn-primary">Initialize drivers</button>
 </form>
 <form th:action="@{${initVehiclesEndpoint}}" method="post">
-    <button type="submit">Initialize vehicles</button>
+    <button type="submit" class="btn btn-primary">Initialize vehicles</button>
 </form>
 <form th:action="@{${initCargoOrdersEndpoint}}" method="post">
-    <button type="submit">Initialize cargo orders</button>
+    <button type="submit" class="btn btn-primary">Initialize cargo orders</button>
 </form>
 </body>
 </html>

@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<div th:insert="fragments/mainManu :: mainMenu"></div>
+<div th:insert="fragments/mainNavbar :: mainNavbar"></div>
 <h1>All Vehicles</h1>
 <div th:if="${error}">
     <p style="color: red;" th:text="${error}"></p>
@@ -26,6 +26,7 @@
         <th>Payload</th>
         <th>Status</th>
         <th>Actions</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -39,8 +40,8 @@
             <form th:action="@{${getBrokenStatusHandlerEndpoint}(id=${vehicle.id})}" method="post" style="display:inline;">
                 <button type="submit" th:text="${vehicle.broken ? 'Mark as Operational' : 'Mark as Broken'}"></button>
             </form>
-            <a th:href="@{${getVehicleEndpoint}(id=${vehicle.id})}">View</a>
         </td>
+        <td><a th:href="@{${getVehicleEndpoint}(id=${vehicle.id})}">View</a></td>
     </tr>
     </tbody>
 </table>

@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/basicHeadProperties :: basicHeadProperties">
+<head th:include="fragments/tableHeadProperties :: tableHeadProperties">
     <title>History</title>
+    <style>
+        th {
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-<div th:insert="fragments/mainManu :: mainMenu"></div>
+<div th:insert="fragments/mainNavbar :: mainNavbar"></div>
 <h1>History</h1>
-<table>
+<table class="table table-striped" id="dataTable" data-page-length='50'>
     <thead>
     <tr>
         <th>ID</th>

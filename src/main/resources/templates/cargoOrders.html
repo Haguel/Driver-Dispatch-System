@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<div th:insert="fragments/mainManu :: mainMenu"></div>
+<div th:insert="fragments/mainNavbar :: mainNavbar"></div>
 <h1>All Cargo Orders</h1>
 <div th:if="${error}">
     <p style="color: red;" th:text="${error}"></p>
@@ -25,7 +25,7 @@
         <th>Cargo Amount</th>
         <th>Days Till Complete</th>
         <th>Status</th>
-        <th>Actions</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
