@@ -25,9 +25,22 @@ public class CargoDeliverySimulator {
     public void simulateDayPass() {
         CargoStatus inProgressStatus = cargoStatusService.getInProgressStatus();
         CargoStatus pausedStatus = cargoStatusService.getPausedStatus();
+        CargoStatus notStartedOrderStatus = cargoStatusService.getNotStartedStatus();
 
         List<CargoOrder> inProgressOrders = cargoOrderService.getOrdersByStatus(inProgressStatus);
         List<CargoOrder> pausedOrders = cargoOrderService.getOrdersByStatus(pausedStatus);
+        List<CargoOrder> notStartedOrders = cargoOrderService.getOrdersByStatus(notStartedOrderStatus);
+
+        notStartedOrders.forEach(cargoOrder -> {
+            // if not assigned -> throws exception -> skip till next day
+            try {
+                cargoOrderService.assignAppropriateDriver(cargoOrder, cargoOrder.getMinExperienceRequired());
+                cargoOrderService.assignAppropriateVehicle(cargoOrder, cargoOrder.getCargoAmount());
+                cargoOrderService.setNewStatus(cargoOrder, inProgressStatus);
+            } catch (Exception e) {
+
+            }
+        });
 
         inProgressOrders.forEach(cargoOrder -> {
             if(random.nextInt(100) < 10) { // 10% chance of completion

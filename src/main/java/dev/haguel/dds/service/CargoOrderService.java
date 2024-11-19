@@ -71,15 +71,33 @@ public class CargoOrderService {
 
         cargoOrderRepository.save(cargoOrder);
 
-        Driver driver = driverService.getFreeDriverByExperience(cargoOrderDTO.getMinExperienceRequired());
-        Vehicle vehicle = vehicleService.getFreeVehicleByPayload(cargoOrderDTO.getCargoAmount());
-        CargoStatus inProgressStatus = cargoStatusService.getInProgressStatus();
+        try {
+            cargoOrder = assignAppropriateDriver(cargoOrder, cargoOrderDTO.getMinExperienceRequired());
+            cargoOrder = assignAppropriateVehicle(cargoOrder, cargoOrderDTO.getCargoAmount());
+            cargoOrder = setNewStatus(cargoOrder, cargoStatusService.getInProgressStatus());
+        } catch (DriverNotFoundException | VehicleNotFoundException e) {
+            cargoOrder = setNewStatus(cargoOrder, notStartedStatus);
+        }
 
-        cargoOrder.setCargoStatus(inProgressStatus);
+        return cargoOrder;
+    }
+
+    public CargoOrder assignAppropriateDriver(CargoOrder cargoOrder, short minExperienceRequired) throws DriverNotFoundException {
+        Driver driver = driverService.getFreeDriverByExperience(minExperienceRequired);
         cargoOrder.setDriver(driver);
+
+        return cargoOrderRepository.save(cargoOrder);
+    }
+
+    public CargoOrder assignAppropriateVehicle(CargoOrder cargoOrder, int cargoAmount) throws VehicleNotFoundException {
+        Vehicle vehicle = vehicleService.getFreeVehicleByPayload(cargoAmount);
         cargoOrder.setVehicle(vehicle);
 
+        return cargoOrderRepository.save(cargoOrder);
+    }
 
+    public CargoOrder setNewStatus(CargoOrder cargoOrder, CargoStatus status) {
+        cargoOrder.setCargoStatus(status);
 
         return cargoOrderRepository.save(cargoOrder);
     }

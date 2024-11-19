@@ -42,48 +42,52 @@ class CargoOrderServiceTest {
     @Test
     @DisplayName("Should create and return order with given valid DTO")
     void should_creteOrder_when_validDto() {
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        Mockito.when(cargoOrderRepository.save(Mockito.any(CargoOrder.class)))
+                .thenReturn(new CargoOrder());
 
-        Mockito.verify(cargoOrderRepository, Mockito.times(6))
+        int testAmount = 10;
+        for(int i = 0; i < testAmount; i++) {
+            assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        }
+
+        Mockito.verify(cargoStatusService, Mockito.times(1 * testAmount))
+                .getInProgressStatus();
+        Mockito.verify(cargoOrderRepository, Mockito.times(4 * testAmount))
                 .save(Mockito.any(CargoOrder.class));
     }
 
     @Test
-    @DisplayName("Should throw exception when trying create order but no driver with minimum required experience found")
-    void should_throwException_when_unableToFindDriver() throws DriverNotFoundException {
+    @DisplayName("Should set not started status when trying create order but no driver with minimum required experience found")
+    void should_setNotStartedStatus_when_unableToFindDriver() throws DriverNotFoundException {
         Mockito.when(driverService.getFreeDriverByExperience(Mockito.anyShort()))
                 .thenThrow(DriverNotFoundException.class);
+        Mockito.when(cargoOrderRepository.save(Mockito.any(CargoOrder.class)))
+                .thenReturn(new CargoOrder());
 
-        assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertThrows(DriverNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
 
-        Mockito.verify(cargoOrderRepository, Mockito.times(3))
-                .save(Mockito.any(CargoOrder.class));
+        Mockito.verify(cargoStatusService, Mockito.times(0))
+                .getInProgressStatus();
+        Mockito.verify(cargoStatusService, Mockito.times(1))
+                .getNotStartedStatus();
     }
 
     @Test
-    @DisplayName("Should throw exception when trying create order but no vehicle with minimum required payload found")
-    void should_throwException_when_unableToFindVehicle() throws VehicleNotFoundException {
+    @DisplayName("Should set not started status when trying create order but no vehicle with minimum required payload found")
+    void should_setNotStartedStatus_when_unableToFindVehicle() throws VehicleNotFoundException, DriverNotFoundException {
+        Mockito.when(driverService.getFreeDriverByExperience(Mockito.anyShort()))
+                .thenReturn(null);
         Mockito.when(vehicleService.getFreeVehicleByPayload(Mockito.anyInt()))
                 .thenThrow(VehicleNotFoundException.class);
-        Mockito.verify(cargoOrderRepository, Mockito.times(0))
-                .save(Mockito.any(CargoOrder.class));
+        Mockito.when(cargoOrderRepository.save(Mockito.any(CargoOrder.class)))
+                .thenReturn(new CargoOrder());
 
-        assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
-        assertThrows(VehicleNotFoundException.class,
-                () -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
+        assertDoesNotThrow(() -> cargoOrderService.createOrder(TestCargoOrderDTOFactory.createRandomCargoOrderDTO()));
 
-        Mockito.verify(cargoOrderRepository, Mockito.times(3))
-                .save(Mockito.any(CargoOrder.class));
+        Mockito.verify(cargoStatusService, Mockito.times(0))
+                .getInProgressStatus();
+        Mockito.verify(cargoStatusService, Mockito.times(1))
+                .getNotStartedStatus();
     }
 
     @Test
